@@ -23,6 +23,13 @@ class User extends Authenticatable
         return $this->hasMany(Question::class);
     }
 
+            //accessor
+    public function getUrlAttribute()
+    {
+        //return route('questions.show',$this->id);
+        return '#';
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
