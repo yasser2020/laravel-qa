@@ -15,11 +15,12 @@ class QuestionController extends Controller
     public function index()
     {
         
-        
-
+        //\DB::enableQueryLog();
+        //or install this package for debug
+//composer require barryvdh/laravel-debugba
         $questions=Question::with('user')->latest()->paginate(5);
-         return view('questions.index',compact('questions'));
-      
+       return  view('questions.index',compact('questions'));
+       // dd(\DB::getQueryLog());
     }
 
     /**
