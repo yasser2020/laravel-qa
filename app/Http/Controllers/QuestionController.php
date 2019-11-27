@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use Illuminate\Http\Request;
+use App\Http\Requests\AskQuestionRequest;
 
 class QuestionController extends Controller
 {
@@ -14,7 +15,6 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        
         //\DB::enableQueryLog();
         //or install this package for debug
 //composer require barryvdh/laravel-debugba
@@ -40,9 +40,12 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AskQuestionRequest $request)
     {
-        //
+       $request->user()->questions()->create($request->only('title','body'));
+       
+        return redirect()->route('questions.index')->with('success','Your Question has been submited');
+
     }
 
     /**

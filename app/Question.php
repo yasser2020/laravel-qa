@@ -30,11 +30,13 @@ class Question extends Model
         return $this->created_at->diffForHumans();
     }
 
+
+     //this is accessor for set sitablue class to status
     public function getStatusAttribute()
     {
         if($this->anwsers>0)
         {
-               if($this->best_answer_id){
+               if($this->best_anwser_id){
                    return "answered-accepted";
                }
                return "answered";
