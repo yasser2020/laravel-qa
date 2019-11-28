@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use App\Question;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -23,7 +23,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::bind('slug',function($slug){
+            return Question::where('slug',$slug)->first()??abort(404);
+            
+        });
 
         parent::boot();
     }
