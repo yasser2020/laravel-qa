@@ -22,4 +22,14 @@ class Answer extends Model
     {
         return \Parsedown::instance()->text($this->body);
     }
+
+    public  static function boot()
+    {
+        parent::boot();
+        parent::created(function($answer){
+            $answer->question->increment('answers_count');
+            $answer->question->save();
+        });
+        
+    }
 }
