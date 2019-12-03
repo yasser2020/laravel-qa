@@ -34,7 +34,7 @@ class Question extends Model
      //this is accessor for set sitablue class to status
     public function getStatusAttribute()
     {
-        if($this->anwsers>0)
+        if($this->anwsers_count>0)
         {
                if($this->best_anwser_id){
                    return "answered-accepted";
@@ -47,6 +47,11 @@ class Question extends Model
     public function getBodyHtmlAttribute()
     {
         return \Parsedown::instance()->text($this->body);
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
     }
     
    
